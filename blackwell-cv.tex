@@ -6,14 +6,17 @@
 \usepackage[svgnames]{xcolor}
 \usepackage{hyperref}
 \usepackage{marvosym}
+\usepackage{fancyhdr}
 \usepackage{fontspec}
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \usepackage[super]{nth}
 %\usepackage[T1]{fontenc}
 \defaultfontfeatures{Mapping=tex-text}
-\setsansfont{Helvetica Neue LT Pro 65 Medium}
+\setsansfont{Helvetica Neue Medium}
 \setmainfont{Garamond Premier Pro}
+
+\input{vc}
 
 
 \usepackage{ifsym}
@@ -42,7 +45,7 @@
       \setlength{\itemsep}{0in}
       \setlength{\parsep}{0in} \setlength{\parskip}{0in}
       \setlength{\topsep}{0in} \setlength{\partopsep}{0in} 
-      \setlength{\leftmargin}{0.17in}}}{\end{list}}
+      \setlength{\leftmargin}{0.83 cm}}}{\end{list}}
 \newenvironment{list2}{
   \begin{list}{$\bullet$}{%
       \setlength{\itemsep}{0in}
@@ -51,6 +54,19 @@
       \setlength{\leftmargin}{0.2in}}}{\end{list}}
 
 \begin{document}
+
+%%%------------------------------------------------------------------------
+%%% Page layout
+%%%------------------------------------------------------------------------
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\fancyfoot{}
+\rhead{{\scriptsize\thepage}}
+
+%% git revision control footer 
+\rfoot{\texttt{\scriptsize \VCRevision\ on \VCDateTEX}} % git revision info inserted via external script -- see docs for vc package for details. comment out this line if you're not using vc, and also remove the \input{vc} line above.
+
 
 \name{\textcolor{DarkRed}{\sc \LARGE Matthew L. Blackwell} \vspace*{.1in}}
 
@@ -61,7 +77,7 @@
 Department of Government \& & {\Large \Mobilefone} (714) 743-7280 \\         
 Institute for Quantitative Social Science & {\Large \Letter} 
 \href{mailto:mblackwell@iq.harvard.edu}{\tt mblackwell@iq.harvard.edu}\\
-Harvard University & {\LARGE \ComputerMouse} \url{http://www.people.fas.harvard.edu/\~blackwel/}\\
+Harvard University & {\LARGE \ComputerMouse} \url{http://mattblackwell.org}\\
 1737 Cambridge St   & \\
 Cambridge, MA 02138 & \\     
 \end{tabular}
@@ -71,6 +87,7 @@ Cambridge, MA 02138 & \\
 {\bf Harvard University} {\em Department of Government}
 \begin{list1}
 \item[] Ph.D candidate (expected June 2012). 
+\item[] Dissertation: \emph{Essays in American Politics and Political Methodology}.
 \item[] Committee: Gary King (chair), Steve Ansolabehere, Adam Glynn.
 \end{list1}
 {\bf University of California, Los Angeles}, 
@@ -88,14 +105,14 @@ King, Guiseppe Porro)  \emph{Stata
 \section{\sc Working papers}
 
 {\bf ``Multiple Overimputation: A Unified Approach to Measurement Error and
-Missing Data.''} (with James Honaker and Gary King) \vspace{1em}\\
+Missing Data,''} (with James Honaker and Gary King) \emph{Under Review}.\vspace{1em}\\
 %\begin{list1}
 %\item[] \emph{Presented at the 2010 Midwest Political Science
 %    Association Conference, Chicago, IL.}
 %\item[] \emph{Presented at the 2010 Summer Meeting of the Society
 %for Political Methodology, University of Iowa.}
 %\end{list1} \vspace{-.5em}
-{\bf ``A Framework for Dynamic Causal Inference in Political Science.''}\vspace{1em}\\
+{\bf ``A Framework for Dynamic Causal Inference in Political Science,''} \emph{Under Review}.\vspace{1em}\\
 %\begin{list1}
 %\item[] \emph{Presented at the 2010 Annual Meeting of the American
 %    Political Science Association, Washington DC.}
@@ -105,52 +122,61 @@ Missing Data.''} (with James Honaker and Gary King) \vspace{1em}\\
 
 
 \section{\textsf{\sc Invited Talks}}
-{\bf New Faces in Political Methodology}, Penn State University, State College, PA, April \nth{30}, 2011. 
+2011. {\bf New Faces in Political Methodology}, Penn State University. April. 
 \begin{list1} 
 \item[] \emph{A Framework Dynamic Causal Inference in Political Science}
 \end{list1} \vspace{-0em}
-{\bf Murno Lecture Series}, Department of Political Science, Stanford University, January  \nth{12}, 2011. 
+2011. {\bf Murno Lecture Series}, Department of Political Science, Stanford University. January. 
 \begin{list1} 
 \item[] \emph{The Long, Dynamic Reach of Selection Bias in Campaign Advertising}
 \end{list1} \vspace{-0em}
-{\bf Stata Conference}, Boston, MA, July \nth{16}, 2010.
+2010. {\bf Stata Conference}, Boston, MA. July.
 \begin{list1}
 \item[] \emph{\textsc{cem}: Coarsened exact matching in Stata}
 \end{list1}\vspace{-.5em}
 \section{\textsf{\sc Conference Presentations}}
 
-{\bf Applied Statistics Workshop}, \textsc{iqss}, Harvard University, September \nth{25}, 2010.
+2011. {\bf Society for Political Methodology \nth{28} Summer Meeting}, Princeton University. July.
+\begin{list1}
+\item[] \emph{Dynamic Causal Inference and Negative Advertising} (Poster presentation)
+\end{list1}\vspace{-0em}
+
+2011. {\bf Midwest Political Science Association Annual Conference}, Chicago, IL. April.
+\begin{list1}
+\item[] \emph{The Long, Dynamic Reach of Selection Bias in Campaign Advertising}
+\end{list1}\vspace{-0em}
+
+2010. {\bf Applied Statistics Workshop}, \textsc{iqss}, Harvard University. September.
 \begin{list1}
 \item[] \emph{Multiple Overimputation: A Unified Approach to Measurement Error and
 Missing Data}
 \end{list1}\vspace{-0em}
 
-{\bf 2010 American Political Science Association Annual Meeting}, September \nth{3}, 2010. 
+2010. {\bf American Political Science Association Annual Meeting}, Washington, D.C. September. 
 \begin{list1} 
 \item[] \emph{A Model for Dynamic Causal Inference in Political
     Science}
 \end{list1}\vspace{-0em}
- {\bf Society for Political
-  Methodology \nth{27} Summer Meeting}, July \nth{24}, 2010.
+2010. {\bf Society for Political Methodology \nth{27} Summer Meeting}, University of Iowa. July.
 \begin{list1}
 \item[] \emph{Multiple Overimputation: A Unified Approach to Measurement Error and
 Missing Data} (Plenary presentation)
 \item[] \emph{Estimating Dynamic Treatment Regimes} (Poster presentation)
 \end{list1}\vspace{-0em}
 
-{\bf 2010 Midwest Political Science Association Annual Conference}, July \nth{24}, 2010. 
+2010. {\bf Midwest Political Science Association Annual Conference}, Chicago, IL. July. 
 \begin{list1}
 \item[] \emph{Multiple Overimputation: A Unified Approach to Measurement Error and
 Missing Data}
 \end{list1}\vspace{-0em}
 
-{\bf Society for Political Methodology \nth{26} Summer Meeting}, July \nth{25}, 2009.
+2009. {\bf Society for Political Methodology \nth{26} Summer Meeting}, Yale University. July.
 \begin{list1}
 \item[]  \emph{Amelia: A Package for Missing Data} (Software presentation)
 \item[]  \emph{Smoothing Over A Space} (Poster presentation)
 \end{list1}\vspace{-0em}
 
-{\bf Society for Political Methodology \nth{25} Summer Meeting}, July \nth{11}, 2008.
+2008. {\bf Society for Political Methodology \nth{25} Summer Meeting}, University of Iowa. July.
 \begin{list1}
 \item[] \emph{Causal Inference in Panel Data} (Poster presentation)
 \end{list1}\vspace{-.5em}
@@ -185,20 +211,20 @@ Kennedy School.
 \end{list1}
 
 \section{\sc Honors \& Awards}
-2011 John T. Williams Dissertation Prize, Society for Political Methodology.
+2011. John T. Williams Dissertation Prize, Society for Political Methodology.
 \begin{list1} 
 \item[] Best dissertation proposal in the area of political methodology.
 \end{list1}
 \vspace{-1em}
-2010 Jeanne Humphrey Block Dissertation Award, Institute for Quantitative Social Science. \\
-2010 Institute for Quantitative Social Science Research Grant Award.\\
-2010 Dirksen Center Congressional Research Award.\\
-2009 Harvard University Certificate of Distinction in Teaching. \\
-2008 Fellowship in Political Economy, Department of Government, Harvard
+2010. Jeanne Humphrey Block Dissertation Award, Institute for Quantitative Social Science. \\
+2010. Institute for Quantitative Social Science Research Grant Award.\\
+2010. Dirksen Center Congressional Research Award.\\
+2009. Harvard University Certificate of Distinction in Teaching. \\
+2008. Fellowship in Political Economy, Department of Government, Harvard
 University.\\
-2006-09 Graduate Prize Fellowship, Graduate School of Arts and Sciences, Harvard
+2006-2009. Graduate Prize Fellowship, Graduate School of Arts and Sciences, Harvard
 University.\\
-2005 Sylvia Sorkin Greenfield Memorial Award University of California, Los Angeles.
+2005. Sylvia Sorkin Greenfield Memorial Award University of California, Los Angeles.
 \begin{list1} 
 \item[] Best senior thesis in Political Science, Adviser: James Honaker.
 \end{list1}
@@ -243,7 +269,7 @@ Author's Committee for the IQSS Social Science Statistics Blog,
 \end{list1} \vspace{-1em}
 Institute for Quantiative Social Science, Harvard University,
 \begin{list1}
-\item[] \emph{Affiliate}, 2008-Present.
+\item[] \emph{Affiliate in Residence}, 2008-Present.
 \end{list1} \vspace{-1em}
  Kirkland House, Harvard College. 
 \begin{list1}

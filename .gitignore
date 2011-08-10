@@ -1,3 +1,5 @@
 *.log
 vc
 vc-git.awk
+vc.tex
+blackwell-cv.pdf
