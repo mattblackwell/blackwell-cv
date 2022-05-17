@@ -1,363 +1,484 @@
-%%%%%%%
-%!TEX TS-program = xelatex
-%!TEX encoding = UTF-8 Unicode
+%%%------------------------------------------------------------------------
+%%% Vita Template
+%%% Matthew Blackwell <mblackwell@gov.harvard.edu>
+%%% Most recent version at https://github.com/mattblackwell/blackwell-cv
+%%%
+%%% Compile with xelatex
+%%% Requirements not in standard TeX distributions:
+%%% - IBM Plex fonts <https://www.ibm.com/plex/>
+%%% - Garamond Premier Pro font from Adobe (Crimson Pro is a good free alternative)
+%%%
+%%%
+%%% Credit to Kieran Healy for some parts of this template <http://kjhealy.github.com/kjh-vita>
+%%%
 
-\documentclass[margin,line,12pt]{res}
+\documentclass[11pt,article,oneside]{memoir}
 \usepackage[svgnames]{xcolor}
 \usepackage{hyperref}
 \usepackage{marvosym}
-\usepackage{fancyhdr}
 \usepackage{fontspec}
 \usepackage{xunicode} 
 \usepackage{xltxtra}
 \usepackage[super]{nth}
+\usepackage{etaremune}
+\usepackage{enumitem}
+\usepackage{fontawesome,url}
 
-% \usepackage[T1]{fontenc}
+
+
+%%%------------------------------------------------------------------------
+%%% Fonts
+%%%------------------------------------------------------------------------
+
 \defaultfontfeatures{Mapping=tex-text}
-\setsansfont{Helvetica Neue Medium}
-\setmainfont[BoldFont = Garamond Premier Pro Semibold]{Garamond Premier Pro}
+\setsansfont[Scale = 1.08]{IBM Plex Sans Condensed-Bold}
+\setmainfont[BoldFont = Garamond Premier Pro Semibold, Scale = 1.08]{Garamond Premier Pro}
+\setmonofont[Scale = 0.88]{IBM Plex Mono}
+
+\definecolor{seablue}{RGB}{52,152,219}
+\definecolor{capred}{RGB}{231, 76, 60}
+ 
+
+%%%------------------------------------------------------------------------
+%%% Metadata
+%%%------------------------------------------------------------------------
+
+\def\myauthor{Matthew Blackwell}
+\def\mytitle{Vita}
+\def\mycopyright{\myauthor}
+\def\mykeywords{Matthew, Blackwell, Matthew Blackwell, Vita, CV, Resume, Political Science}
+\def\mybibliostyle{plain}
+\def\mybibliocommand{}
+\def\mysubtitle{}
+\def\myaffiliation{Harvard University}
+\def\myaddress{Department of Government}
+\def\myemail{mblackwell@gov.harvard.edu}
+\def\myweb{http://mattblackwell.org}
+\def\myphone{617-496-2426}
+\def\myfax{}
+\def\mytwitter{@matt\_blackwell}
+\def\myversion{}
+\def\myrevision{}
+
+
+\date{} % not used (revision control instead)
+
 
 \input{vc}
 
 
-\usepackage{ifsym}
-%\usepackage{helvet}
-\oddsidemargin -.5in
-\evensidemargin -.5in
-\textwidth=6.0in
-\itemsep=0in
-\parsep=0in
-
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
-    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
-    pdftoolbar=true,        % show Acrobat’s toolbar?
-    pdfmenubar=true,        % show Acrobat’s menu?
-    pdffitwindow=false,     % window fit to page when opened
-    pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={Matthew Blackwell},    % title
-    pdfauthor={Matthew Blackwell},     % author
-    pdfsubject={Curriculum Vitae},   % subject of the document
-    colorlinks=true,      % false: boxed links; true: colored links
-    urlcolor={blue!80}
+  pdftitle={Matthew Blackwell Vita},    % title
+  pdfauthor={Matthew Blackwell},     % author
+  pdfsubject={Curriculum Vitae},   % subject of the document
+  pdfkeywords=\mykeywords,
+  colorlinks=true,      % false: boxed links; true: colored links
+  urlcolor={seablue}
 }
-\newenvironment{list1}{
-  \begin{list}{\ding{113}}{%
-      \setlength{\itemsep}{0in}
-      \setlength{\parsep}{0in} \setlength{\parskip}{0in}
-      \setlength{\topsep}{0in} \setlength{\partopsep}{0in} 
-      \setlength{\leftmargin}{0.83 cm}}}{\end{list}}
-\newenvironment{list2}{
-  \begin{list}{$\bullet$}{%
-      \setlength{\itemsep}{0in}
-      \setlength{\parsep}{0in} \setlength{\parskip}{0in}
-      \setlength{\topsep}{0in} \setlength{\partopsep}{0in} 
-      \setlength{\leftmargin}{0.2in}}}{\end{list}}
 
-\begin{document}
+
+%%%------------------------------------------------------------------------
+%%% CV list setup
+%%%------------------------------------------------------------------------
+
+
+\newlist{cvlist}{itemize}{2}
+\setlist[cvlist, 1]{
+  label={},
+  itemsep = 1em,
+  topsep = 0in,
+  partopsep=0in,
+  leftmargin=0in,
+  before=\noindent
+}
+\setlist[cvlist, 2]{
+  label={},
+  itemsep = 0em,
+  topsep = -1ex,
+  partopsep=0in,
+  parsep = 0in
+}
+
 
 %%%------------------------------------------------------------------------
 %%% Page layout
 %%%------------------------------------------------------------------------
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-\fancyhead{}
-\fancyfoot{}
-\cfoot{{\scriptsize\thepage}}
-%% git revision control footer 
-\rfoot{\texttt{\scriptsize \VCRevision\ on \VCDateTEX}} % git revision info inserted via external script -- see docs for vc package for details. comment out this line if you're not using vc, and also remove the \input{vc} line above.
+%%% MARGIN HEAD as section header:
+%%%	1. now avoid manually adjusting vertical positions of section headers
+%%%	2. only need to check the end of each page, where header might be separated from its body
+\newcommand{\marginhead}[1]{%
+  \medskip%
+  \mbox{\relax}% KEY command to make it possible to automatically keep inline with body text
+  \marginpar{%
+    \raggedleft% now RIGHT justified to body text, comment out if prefer to be left justified                
+    \footnotesize\sffamily%
+    \color{seablue}%
+    #1%
+  }%
+  \vskip-1.4ex\relax% now lining at TOP with body text, change to 1.6ex to be lining at BOTTOM (of the same line)
+}%
 
-%\name{\textcolor{DarkRed}{\sc \LARGE Matthew L. Blackwell} \vspace*{.1in}}
-\name{\fontsize{36}{36}  \fontspec{League Gothic} \textcolor{IndianRed}{MATTHEW BLACKWELL}}
-\begin{resume}
-\section{\sc Contact Information}
-\vspace{.05in}
-\begin{tabular}{@{}p{2.5in}p{4in}}
-1737 Cambridge St K305 & {\Large \Telefon} 617-496-2426 \\         
-Department of Government  & {\Large \Letter} 
-\href{mailto:mblackwell@gov.harvard.edu}{\tt mblackwell@gov.harvard.edu}\\
-Harvard University & {\LARGE \ComputerMouse} \url{http://mattblackwell.org}\\
-Cambridge, MA 02138 & \\     
-\end{tabular}
 
-\section{\sc Employment}
+\setlength{\parindent}{0em}
+\setlength{\textwidth}{6.0in}
 
-{\bf Harvard University}, {\em Department of Government}
-\begin{list1}
-\item[]  Associate Professor (untenured), July 2018-Present. 
-\item[]  Assistant Professor, July 2014--June 2018. 
-\item[]  Affiliate, Institute for Quantitative Social Science.
-\end{list1}
 
-{\bf University of Rochester}, {\em Department of Political Science}
-\begin{list1}
-\item[]  Assistant Professor, July 2012-June, 2014. 
-\item[]  Affiliate, University of Rochester Data Science Institute.
-\end{list1}
 
-\section{\sc Education}
+\begin{document}
 
-{\bf Harvard University}, {\em Department of Government}
-\begin{list1}
-\item[] Ph.D, Political Science, 2012. 
-\end{list1}
-{\bf University of California, Los Angeles}
-\begin{list1}
-\item[] B.A., Political Science \& Economics, 2005.
-\item[] \emph{Magna cum laude} \& Departmental Highest Honors.
-\end{list1}
 
-\section{\sc Book}
+%%%------------------------------------------------------------------------
+%%% Page style
+%%%------------------------------------------------------------------------
+
+% git revision info inserted via external script -- see docs for vc package for details. comment out this line if you're not using vc, and also remove the \input{vc} line above.
+\copypagestyle{git}{plain}
+\makeoddfoot{git}{}{\footnotesize\thepage}{\texttt{\footnotesize \VCRevision\ on \VCDateTEX}}
+\makeoddfoot{plain}{}{\footnotesize\thepage}{}
+\thispagestyle{git}
+
+
+
+
+%%%------------------------------------------------------------------------
+%%% Address and contact block
+%%%------------------------------------------------------------------------
+\begin{minipage}[t]{3.8in}
+ \flushright {\footnotesize 
+ 1737 Cambridge St \\ \href{http://iqss.harvard.edu}{Institute for Quantitative Social Science} \\ Harvard University \\ \vspace{-0.05in} Cambridge, \textsc{ma} 02138}  
+  
+\end{minipage}
+\hfill     
+%\begin{minipage}[t]{0.0in}
+% dummy (needed here)
+%\end{minipage}
+\hfill
+\begin{minipage}[t]{2in}
+  \flushright \footnotesize   \myphone \, \faPhone \\ 
+  {\scriptsize  \texttt{\href{http://twitter.com/matt_blackwell}{\mytwitter}} \, \faTwitter }  \\ 
+  {\scriptsize  \texttt{\href{mailto:\myemail}{\myemail}} \, \faEnvelope} \\
+  {\scriptsize  \texttt{\href{\myweb}{\myweb}} \, \faGlobe}
+\end{minipage}
+
+
+\noindent {\sffamily \LARGE\textcolor{capred}{Matthew Blackwell}}
+\reversemarginpar
+
+
+\marginhead{Employment}
+\begin{cvlist}
+\item {\bfseries Harvard University}, {\em Department of Government}
+\begin{cvlist}
+\item Associate Professor (untenured), July 2018-Present. 
+\item Assistant Professor, July 2014--June 2018. 
+\item Affiliate, Institute for Quantitative Social Science.
+\end{cvlist}
+
+\item {\bfseries University of Rochester}, {\em Department of Political Science}
+\begin{cvlist}
+\item  Assistant Professor, July 2012-June, 2014. 
+\item  Affiliate, University of Rochester Data Science Institute.
+\end{cvlist}
+\end{cvlist}
+\bigskip
+
+\marginhead{Education}
+\begin{cvlist}
+\item {\bfseries Harvard University}, {\em Department of Government}
+\begin{cvlist}
+\item Ph.D, Political Science, 2012. 
+\end{cvlist}
+
+\item {\bfseries University of California, Los Angeles}
+\begin{cvlist}
+\item B.A., Political Science \& Economics, 2005.
+\item \emph{Magna cum laude} \& Departmental Highest Honors.
+\end{cvlist}
+\end{cvlist}
+
+\bigskip
+
+\marginhead{\sffamily Book}
 
 Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/deep-roots/}{\emph{Deep Roots: How Slavery Still Shapes Southern Politics}}, Princeton University Press, 2018.
 \begin{itemize} 
 \item Winner of the 2019 William H. Riker Book Award, which ``is awarded by the Political Economy Section of the American Political Science Association and given for the best book on political economy published during the past three calendar years.''
-\item Review in \emph{Science, Journal of Politics, Journal of Regional Studies, Political Science Quarterly, Choice}, symposium in \emph{Perspectives in Politics}.
+\item Reviewed in \emph{Science, Journal of Politics, Journal of Regional Studies, Political Science Quarterly, Choice, American Journal of Sociology, Los Angeles Sentinel, Journal of American Ethnic History}, symposium in \emph{Perspectives in Politics}.
 \end{itemize}
-
-\section{\sc Publications}
-
-Matthew Blackwell and Anton Strezhnev, \href{https://mattblackwell.org/files/papers/telescope_matching.pdf}{``Telescope Matching: Reducing Model Dependence in the Estimation of Controlled Direct Effects.''} \emph{Journal of the Royal Statistical Society (Series A)}, Forthcoming (2021). 
-
-
-Matthew Blackwell and Nicole Pashley, \href{https://mattblackwell.org/files/papers/factorial-iv.pdf}{``Noncompliance and instrumental variables for $2^K$ factorial experiments.''} \emph{Journal of the American Statistical Association}, Forthcoming (2021). 
+\bigskip
+ 
+\marginhead{\sffamily Publications}
+\noindent \begin{etaremune}[leftmargin=0.2in, topsep = 0in, partopsep=0in, itemsep=1em]
+\item Matthew Blackwell and Nicole Pashley, \href{https://mattblackwell.org/files/papers/factorial-iv.pdf}{``Noncompliance and instrumental variables for $2^K$ factorial experiments.''} \emph{Journal of the American Statistical Association}, Forthcoming (2022). 
 
 
-Matthew Blackwell and Michael Olson, \href{https://mattblackwell.org/files/papers/lasso-inters.pdf}{``Reducing Model Misspecification and Bias in the Estimation of Interactions.''} \emph{Political Analysis}, Forthcoming (2021). 
+\item Matthew Blackwell and Michael Olson, \href{https://mattblackwell.org/files/papers/lasso-inters.pdf}{``Reducing Model Misspecification and Bias in the Estimation of Interactions.''} \emph{Political Analysis}, Forthcoming (2022). 
+
+\item Matthew Blackwell and Anton Strezhnev, \href{https://mattblackwell.org/files/papers/telescope_matching.pdf}{``Telescope Matching: Reducing Model Dependence in the Estimation of Controlled Direct Effects.''} \emph{Journal of the Royal Statistical Society (Series A)}, Vol. 185, No. 1 (2022): 377--399. 
 
 
-Matthew Blackwell and Adam Glynn, \href{http://www.mattblackwell.org/files/papers/causal-tscs.pdf}{``How to Make Causal Inferences with Time-Series
+\item Matthew Blackwell and Adam Glynn, \href{http://www.mattblackwell.org/files/papers/causal-tscs.pdf}{``How to Make Causal Inferences with Time-Series
   Cross-Sectional Data under Selection on Observables,''} \emph{American Political Science Review}, Vol. 112, No. 4 (2018): 1067--1082.
 
- Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/survey-experiments.pdf}{``Analyzing Causal Mechanisms in Survey Experiments,''} \emph{Political Analysis}, Vol. 26, No. 4 (2018): 357--378.\vspace{1em}\\
-Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/gamechangers-letter.pdf}{``Game Changers: Detecting Shifts in Overdispersed Count Data,''} \emph{Political Analysis}, Vol. 26, No. 2 (2018): 230--239.\vspace{1em}\\
-Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/attitudes.pdf}{``Explaining Attitudes from Behavior: A Cognitive Dissonance Approach,''} \emph{Journal of Politics}, Vol. 80, No. 2 (2018): 400--411.\vspace{1em}\\
-Matthew Blackwell, James Honaker, and Gary King, \href{http://gking.harvard.edu/files/measure.pdf}{``A Unified Approach to Measurement Error and
-Missing Data: Overview and Applications,''} \emph{Sociological Methods \& Research}, Vol. 46, No. 3 (2017): 303--341.\vspace{1em}\\
-Matthew Blackwell, James Honaker, and Gary King, \href{http://gking.harvard.edu/files/measured.pdf}{``A Unified Approach to Measurement Error and
-  Missing Data: Details and Extensions,''} \emph{Sociological Methods \& Research}, Vol. 46, No. 3 (2017): 342--369.\vspace{1em}\\
-Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/joint-iv.pdf}{``Instrumental Variable Methods for Conditional Effects and Causal Interaction in Voter Mobilization Experiments,''} \emph{Journal of the American Statistical Association}, Vol. 113, No. 518 (2017): 590--599. 
-\begin{itemize} 
-\item Winner of the 2017 Harold F. Gosnell Prize, which ``recognizes the best work of Political Methodology presented at a political science conference in the previous year.''
+\item Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/survey-experiments.pdf}{``Analyzing Causal Mechanisms in Survey Experiments,''} \emph{Political Analysis}, Vol. 26, No. 4 (2018): 357--378.
+  
+\item Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/gamechangers-letter.pdf}{``Game Changers: Detecting Shifts in Overdispersed Count Data,''} \emph{Political Analysis}, Vol. 26, No. 2 (2018): 230--239.
+
+\item Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/attitudes.pdf}{``Explaining Attitudes from Behavior: A Cognitive Dissonance Approach,''} \emph{Journal of Politics}, Vol. 80, No. 2 (2018): 400--411.
+
+\item Matthew Blackwell, James Honaker, and Gary King, \href{http://gking.harvard.edu/files/measure.pdf}{``A Unified Approach to Measurement Error and
+    Missing Data: Overview and Applications,''} \emph{Sociological Methods \& Research}, Vol. 46, No. 3 (2017): 303--341.
+  
+\item Matthew Blackwell, James Honaker, and Gary King, \href{http://gking.harvard.edu/files/measured.pdf}{``A Unified Approach to Measurement Error and
+    Missing Data: Details and Extensions,''} \emph{Sociological Methods \& Research}, Vol. 46, No. 3 (2017): 342--369.
+  
+\item Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/joint-iv.pdf}{``Instrumental Variable Methods for Conditional Effects and Causal Interaction in Voter Mobilization Experiments,''} \emph{Journal of the American Statistical Association}, Vol. 113, No. 518 (2017): 590--599. 
+\begin{itemize}[topsep=0em]
+\item  2017 Gosnell Prize winner for best political methodology paper presented in the previous year. %which ``recognizes the best work of Political Methodology presented at a political science conference in the previous year.''
 \end{itemize}
 
-Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/direct-effects.pdf}{``Explaining Causal Effects Without Bias: Detecting and Assessing Direct Effects,''} \emph{American Political Science Review } Vol. 110, No. 3 (2016): 512--529.\vspace{1em}\\
-Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/slavery.pdf}{``The Political Legacy of American Slavery,''}   \emph{Journal of Politics }Vol. 78, No. 3 (2016): 621--641.
-\begin{itemize}
-\item Winner of the 2016 Joseph L. Bernd Award for best paper in the JOP.\end{itemize}
-Matthew Blackwell, \href{http://gking.harvard.edu/files/sens.pdf}{``A Selection Bias Approach to Sensitivity
-Analysis for Causal Effects,''} \emph{Political Analysis} Vol. 22, No. 2 (2014): 169--182.\vspace{1em}\\
-Matthew Blackwell,
+\item Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/direct-effects.pdf}{``Explaining Causal Effects Without Bias: Detecting and Assessing Direct Effects,''} \emph{American Political Science Review } Vol. 110, No. 3 (2016): 512--529.
+
+  
+\item Avidit Acharya, Matthew Blackwell, and Maya Sen, \href{http://www.mattblackwell.org/files/papers/slavery.pdf}{``The Political Legacy of American Slavery,''}   \emph{Journal of Politics }Vol. 78, No. 3 (2016): 621--641.
+\begin{itemize}[topsep=0em]
+\item 2016 Joseph L. Bernd Award winner for best paper in the JOP.
+\end{itemize}
+
+\item Matthew Blackwell, \href{http://gking.harvard.edu/files/sens.pdf}{``A Selection Bias Approach to Sensitivity
+    Analysis for Causal Effects,''} \emph{Political Analysis} Vol. 22, No. 2 (2014): 169--182.
+  
+\item Matthew Blackwell,
 \href{http://mattblackwell.org/files/papers/dynci.pdf}{``A Framework
   for Dynamic Causal Inference in Political Science,''}
-\emph{American Journal of Political Science} Vol. 57 No. 2 (2013): 504--519.\vspace{1em}\\
-James Honaker, Gary King, and Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/amelia-jss.pdf}{``Amelia II: A
+\emph{American Journal of Political Science} Vol. 57 No. 2 (2013): 504--519.
+
+\item James Honaker, Gary King, and Matthew Blackwell, \href{http://www.mattblackwell.org/files/papers/amelia-jss.pdf}{``Amelia II: A
 Program for Missing Data,''} \emph{Journal of Statistical Software}
 Vol. 45 No. 7 (2011): 1--47.
-\vspace{1em}\\
-Matthew Blackwell, Stefano Iacus, Gary King, and Guiseppe Porro, \href{http://www.mattblackwell.org/files/papers/cemStata.pdf}{``cem: Coarsened Exact Matching in Stata,''} \emph{Stata
+
+\item Matthew Blackwell, Stefano Iacus, Gary King, and Guiseppe Porro, \href{http://www.mattblackwell.org/files/papers/cemStata.pdf}{``cem: Coarsened Exact Matching in Stata,''} \emph{Stata
   Journal} Vol. 9 No. 4 (2009): 524--546. 
 
-\section{\sc Working papers}
+\end{etaremune}
+
+
+\bigskip
+
+\marginhead{Working papers}
+\noindent \begin{enumerate}[leftmargin=0.2in, topsep = 0in, partopsep=0in, itemsep=1em]
+\item Matthew Blackwell and Soichiro Yamauchi. \href{https://mattblackwell.org/files/papers/psfe.pdf}{``Adjusting for Unmeasured Confounding in Marginal Structural Models with Propensity-Score Fixed Effects.''}
+
+\item Matthew Blackwell, Adam Glynn, Hanno Hilbig, and Connor Halloran Phillips. \href{https://www.mattblackwell.org/files/papers/did_cde.pdf}{``Multiply Robust Estimation of Controlled Direct Effects under Unmeasured Confounding Using a Difference-in-differences Design: An Application to Reducing Intergroup Prejudice.''}
+
+
+\item Matthew Blackwell, Jacob Brown, Sophie Hill, Kosuke Imai and Teppei Yamamoto. ``Priming Bias versus Post-treatment Bias in Experimental Designs.'' 
 
 
 
-Matthew Blackwell and Soichiro Yamauchi. \href{https://mattblackwell.org/files/papers/psfe.pdf}{``Adjusting for Unmeasured Confounding in Marginal Structural Models with Propensity-Score Fixed Effects.''}
+\item  Matthew Blackwell, Nicole Pashley, and Dominic Valentino. ``When BAD Experiments Are Good: Batch Adaptive Designs to Improve Efficiency in Social Science Experiments.''
+
+\end{enumerate}
+% \marginhead{\sffamily Work in progress}
 
 
-Matthew Blackwell, Jacob Brown, Sophie Hill, Kosuke Imai and Teppei Yamamoto. ``Priming Bias versus Post-treatment Bias in Experimental Designs.'' 
+\bigskip
 
 
+\marginhead{Other writing}
 
-\section{\sc Work in progress}
-
-
-Matthew Blackwell, Adam Glynn, Hanno Hilbig, and Connor Phillips. ``Identification and Estimation of Controlled Direct Effects under Difference-in-Differences Designs.''
-
-
-
-
-Matthew Blackwell, Nicole Pashley, and Dominic Valentino. ``Adaptive Designs for Efficient Factorial Experiments.''
-
-
-\section{\sc Other writing}
-
-Matthew Blackwell and Maya Sen, 
+\begin{cvlist}
+\item Matthew Blackwell and Maya Sen, 
 \href{http://www.mattblackwell.org/files/papers/bigdata.pdf}{``Large
   Datasets and You: A Field Guide''}, \emph{The Political
   Methodologist}, Vol. 10 No. 1 (2012): Pp. 2--5.
+\end{cvlist}
 
-\section{\sc Honors \&\hspace{1em} Awards}
-2019. William H. Riker Book Award, Political Economy Section of the American Political Science Association. For \emph{Deep Roots: How Slavery Still Shapes Southern Politics}. \\
-2017. Gosnell Prize, Society for Political Methodology. For ``Instrumental Variable Methods for Conditional Effects and Causal Interaction in Voter Mobilization Experiments.'' \\
-2016. Joseph L. Bernd Best JOP Paper Award, Southern Political Science Association.  \\
-2014. Statistical Software Award for Amelia II, Society for Political Methodology (with James Honaker and Gary King).\\
-2012. Richard J. Hernstein Prize, Harvard University Graduate School
-for Arts and Sciences.
-\begin{list1}
-\item[] Awarded to the ``best dissertation that exhibits excellent scholarship, originality, breadth of 
-thought, and a commitment to intellectual independence.''
-\end{list1}
-\vspace{-1em}
-2011. John T. Williams Dissertation Prize, Society for Political Methodology.
-\begin{list1} 
-\item[] Best dissertation proposal in the area of political methodology.
-\end{list1}
-\vspace{-1em}
-2010. Jeanne Humphrey Block Dissertation Award, Institute for Quantitative Social Science. \\
-2010. Institute for Quantitative Social Science Research Grant Award.\\
-2010. Dirksen Center Congressional Research Award.\\
-2009. Harvard University Certificate of Distinction in Teaching. \\
-2008. Fellowship in Political Economy, Department of Government, Harvard
-University.\\
-2006-2009. Graduate Prize Fellowship, Graduate School of Arts and Sciences, Harvard
-University.\\
-2005. Sylvia Sorkin Greenfield Memorial Award University of California, Los Angeles.
-\begin{list1} 
-\item[] Best senior thesis in Political Science, Adviser: James Honaker.
-\end{list1}
+\bigskip
 
+\marginhead{Honors and Awards}
 
+\begin{cvlist}
+\item  2019. William H. Riker Book Award, Political Economy Section of the American Political Science Association. For \emph{Deep Roots: How Slavery Still Shapes Southern Politics}. 
 
-\section{\textsf{\sc Invited Talks}}
+\item  2017. Gosnell Prize, Society for Political Methodology. For ``Instrumental Variable Methods for Conditional Effects and Causal Interaction in Voter Mobilization Experiments.'' 
 
-Department of Political Science,  University of Wisconsin, Madison. February, 2019. \\
-Department of Political Science, Yale University. January, 2019. \\
-Modeling Politics \& Policy in Time and Space, Texas A\& M. April, 2017. \\
-Department of Political Science, Yale University. February, 2017. \\
-Department of Political Science, Rice University. November, 2016. \\
-St.\ Louis Area Methods Meeting, American University. April, 2016. \\
-Political Methodology Workshop, UCSD. April, 2016. \\
-9th Annual NYU-CESS Conference on Experimental Political Science, NYU. February, 2016. \\
-Historical Political Economy Conference, London School of Economics. January, 2016. \\
-American Politics Conference, MIT.\@ September, 2015. \\
-Rockefeller Center Public Lecture, Dartmouth College. June, 2015.\\
-Workshop in Quantitative Social Science, Dartmouth College. June, 2015.\\
-Economic History Workshop, Department of Economics, Harvard University. February, 2015.\\
-Research in American \& Comparative Politics Workshop, Boston University. October, 2014.\\
-Political Methodology Seminar, Princeton University. February 2014. \\
-Center for the Study of Democratic Politics Seminar, Princeton University. February 2014.\\
-Department of Clinical and Social Sciences in Psychology, University of Rochester. November 2013.\\
-Departmental Workshop, Department of Political Science, Stanford University. October 2013.\\
-Rochester Big Data Forum, University of Rochester. September 2012.\\
-Research Workshop in American Politics, Department of Political Science, University of California, Berkeley. December 2011.\\
-New Faces in Political Methodology, Penn State University. April 2011. \\
-Murno Lecture Series, Department of Political Science, Stanford University. January 2011. \\
-Stata Conference, Boston, MA\@. July 2010.
+\item  2016. Joseph L. Bernd Best JOP Paper Award, Southern Political Science Association for ``The Political Legacy of American Slavery.''
 
-\section{\textsf{\sc Conference Presentations}}
-{\bf Midwest Political Science Association Annual Conference} Paper: 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018; Discussant: 2013, 2014, 2015, 2016, 2017.\\
-{\bf American Political Science Association Annual Meeting} Paper: 2010, 2011, 2013, 2014, 2015, 2017. Discussant: 2017.\\
-{\bf Society for Political Methodology Summer Meeting} Poster: 2008--2012; Paper: 2010, 2013, 2014, 2015, 2017, 2018, 2020; Discussant: 2012, 2015, 2017, 2019, 2020.\\
-{\bf European Political Science Associate Annual Conference} Paper: 2015.\\ 
-{\bf Atlantic Causal Inference Conference} Paper: 2016. \\
+\item  2014. Statistical Software Award for Amelia II, Society for Political Methodology (with James Honaker and Gary King). 
 
-\section{\textsf{\sc Teaching}}
-{\bf Harvard University}
-\begin{list1}
-\item[] Government 50: Introduction to Political Science Research Methods (Fall 2017, 2018).
-    \item[] Government 51: Data Analysis and Politics (Fall 2020).
-\item[] Government 2000: Introduction to Quantiative Methods I (Fall 2014--2016).
-\item[] Government 2002: Causal Inference (Fall 2015-2017).
-\item[] Government 2002: Topics in Political Methodology (with Arthur Spirling, Fall 2014).
-\item[] Government 2003: Topics in Political Methodology (with Kosuke Imai, Spring 2019).
-\end{list1}
+\item  2012. Richard J. Hernstein Prize, Harvard University Graduate School
+for Arts and Sciences. Awarded to the ``best dissertation that exhibits excellent scholarship, originality, breadth of 
+thought, and a commitment to intellectual independence.'' 
 
-{\bf University of Rochester}
-\begin{list1}
-\item[] Political Science 200: Applied Data Analysis. \href{http://www.mattblackwell.org/files/teaching/psc200-syllabus.pdf}{Syllabus}, \href{http://www.mattblackwell.org/files/teaching/psc200-notes.pdf}{Lecture Notes}
-\item[] \href{http://www.mattblackwell.org/teaching/psc504/}{Political Science 504: Causal Inference}
-\item[] Political Science 208W: Undergraduate Research Seminar.
-\item[] Political Science 502: Political and Economic Networks (with Avi Acharya).
-\end{list1}
+\item  2011. John T. Williams Dissertation Prize, Society for Political Methodology. Best dissertation proposal in the area of political methodology.
 
-{\bf Other}
-\begin{list1}
-\item[] Empirical Political Economy Network (EPEN) Summer School, May 2014, Mexico City. 
-\end{list1}
+\item  2010. Jeanne Humphrey Block Dissertation Award, Institute for Quantitative Social Science.
 
+\item  2010. Institute for Quantitative Social Science Research Grant Award. 
 
+\item  2010. Dirksen Center Congressional Research Award.
 
-\section{\sc Software}
-{\bf Amelia II: A Program for Missing Data} (with James Honaker and Gary
-King). 
-\begin{list1}
-\item[] Amelia is an R library for the handling of incomplete multivariate
+\item  2009. Harvard University Certificate of Distinction in Teaching.
+
+\item  2008. Fellowship in Political Economy, Department of Government, Harvard
+University.
+
+\item  2006-2009. Graduate Prize Fellowship, Graduate School of Arts and Sciences, Harvard
+University.
+
+\item  2005. Sylvia Sorkin Greenfield Memorial Award University of California, Los Angeles. Best senior thesis in Political Science, Adviser: James Honaker.
+\end{cvlist}
+
+\bigskip
+
+\marginhead{Software}
+
+\begin{cvlist}
+\item  \href{http://gking.harvard.edu/amelia/}{\ttfamily Amelia} R library for the handling of incomplete multivariate
   data with an easy-to-use graphical user
-  interface. \url{http://gking.harvard.edu/amelia/} 
-\end{list1}
-{\bf CEM: Coarsened Exact Matching} (with Stefano Iacus, Gary
+  interface. (with James Honaker and Gary
+King). 
+
+\item  \href{http://gking.harvard.edu/cem/}{\ttfamily cem} Stata library for matching to reduce bias in the estimation of causal effects. (with Stefano Iacus, Gary
 King, Guiseppe  Porro.)
-\begin{list1}
-\item[] CEM is a Stata library for matching to reduce bias in the estimation of
-  causal effects. 
-\item[] \url{http://gking.harvard.edu/cem/}
-\end{list1}
-{\bf causalsens} 
-\begin{list1}
-\item[] causalsens is an R package to implement the selection bias approach to sensitivity analysis for causal effects.
-\item[] \url{http://www.mattblackwell.org/software/causalsens/}
-\end{list1}
-
-{\bf DirectEffects} 
-\begin{list1}
-\item[] An R package to estimate the controlled direct effect with a suite of different approaches, including those described in our 2016 APSR article.
-\item[] \url{http://www.mattblackwell.org/software/direct-effects/}
-\end{list1}
-
-% \section{\sc Experience}
-% Research Assistant/Co-author for Gary King, 2006-Present.\\
-% Research Assistant for James Honaker, University of California, Los Angeles, 2003-2006
-
-\section{\sc Service}
-
-\textbf{National Service:} Society for Political Methology Gosnell Prize Committee, 2018--2019. Editorial Board, Journal of Politics, 2017--2018.  Society for Political Methodology John T. William Prize for Best Dissertation Proposal Committee, 2016--2017; Society for Political Methodology Statistical Software Award Committee, 2015--2016.
-
-\textbf{University/Department Service:} Committee on Higher Degrees in Political Economy and Government, 2016--present; Political Methodology Field Coordinator, 2016--present. Strategic Vision Committee, 2016--2017 Selection Committee for Harvard College-UK Fellowships for Graduate Study, 2017; Graduate Student Poster Session Co-coordinator, 2015; Quantitative Methods Search Committee, 2015; Hoopes Prize Social Science Committee, 2015; Cutler Seminar for Political Methodology, 2013-2014, co-coordinator with Curt Signorino; Graduate Admissions Committee, 2013-2014; Institute for Data Science Search Committee, 2013-2014; Undergraduate Faculty Advisor, 2012-2013. \\ 
-\\
-\textbf{Dissertation Committees:}
-\begin{list1}
-\item[] Hye-Sung Kim (University of Rochester, Assistant Professor at Winthrop University).
-%\item[] Ella Foster-Molina (University of Rochester).
-\item[] Rabia Malik (University of Rochester, Assistant Professor at Lahore University of Management Sciences).
-\item[] Benjamin Laughlin (University of Rochester, Postdoctoral Fellow at NYU-Abu Dhabi, to be Assistant Professor at NYU-Abu Dhabi).
-\item[] Mayya Komisarchik (Harvard University, Assistant Professor at University of Rochester).
-\item[] Michael Olson (Harvard University, Assistant Professor at Washington University in St. Louis).
-\item[] Gabriel Koehler-Derrick (Harvard University, Postdoctoral Fellow at Brown University).
-\item[] Shom Mazumder (Harvard University).
-\item[] Riley Carney (Harvard University, In Progress).
-\item[] Soichiro Yamauchi (Harvard University, In Progress).
-\item[] Seth Soderborg (Harvard University, In Progress).
-\item[] Jacob Brown (Harvard University, In Progress).
-\item[] Sophie Hill (Harvard University, In Progress).
-\end{list1} 
- 
-\textbf{Reviewer for:} \emph{American Economic Review: Insights, American Journal of Political Science, American Political Science Review, American Sociological Review, Biostatistics, British Journal of Political Science, Comparative Political Studies, Economics and Politics, Historical Methods, Journal of the American Statistical Association, Journal of Applied Statistics, Journal of Causal Inference, Journal of Development Economics, Journal of the European Economic Association, Journal of Peace Research, Journal of Statistical Software, Journal of the Royal Statistical Society (Series A \& B), Journal of Theoretical Politics, Journalism \& Mass Communication Quarterly, Legislative Studies Quarterly, Multivariate Behavioral Research, National Science Foundation, Observational Studies, PLOS ONE, Political Analysis, Political Behavior, Political Science Research \& Methods, Public Opinion Quarterly, Quarterly Journal of Political Science, Research \& Politics, Social Science Research, Sociological Methods \& Research,  Statistical Analysis and Data Mining, Statistics in Medicine, World Development, World Politics}
 
 
-% \section{\sc Computer Skills} 
-% Statistical Packages:  Development and teaching in R, STATA, \& SPSS.\\
-% Languages: Extensive use of *nix. Some use of Python, tcl/tk, C++, HTML, CSS.
+\item  \href{http://www.mattblackwell.org/software/causalsens/}{\ttfamily  causalsens} R package to implement the selection bias approach to sensitivity analysis for causal effects.
 
-% \section{\sc References}
-% \begin{tabular}{ll}
-% \textbf{Prof. Gary King} & \textbf{Prof. Stephen Ansolabehere} \\ 
-% Albert J. Weatherhead III University Professor & Professor of Government\\
-% Department of Government, Harvard University & Department of Government, Harvard University \\ 
-% Cambridge, MA 02138 & Cambridge, MA 02138 \\ 
-% Tel: (617) 500-7570 & Tel: (617) 496-0234\\
-% Email: \href{mailto:king@harvard.edu}{king@harvard.edu} & Email: \href{mailto:sda@gov.harvard.edu}{sda@gov.harvard.edu} \\ 
-% & \\
-% & \\
-% \textbf{Prof. Adam Glynn} & \\ 
-% Associate Professor &\\
-% Department of Government, Harvard University & \\ 
-% Cambridge, MA 02138 & \\ 
-% Tel: (617) 496-2426 &\\
-% Email: \href{mailto:aglynn@fas.harvard.edu}{aglynn@fas.harvard.edu}  & 
-% \end{tabular}
+\item  \href{https://mattblackwell.github.io/DirectEffects/}{\ttfamily DirectEffects} R package to estimate the controlled direct effect with a suite of different approaches.
 
-\end{resume}
+\item  \href{https://mattblackwell.github.io/factiv/}{\ttfamily factiv} R package to estimate causal effects in factorial experiments with noncompliance on multiple factors, implementing the estimators from Blackwel (2017) and Blackwell and Pashley (2022). 
+
+\item  \href{https://mattblackwell.github.io/inters/}{\ttfamily inters}  R package that implements the post-double-selection approach to estimating interactions in Blackwell and Olson (2022).
+
+\item  \href{https://github.com/mattblackwell/qsslearnr}{\ttfamily qsslearnr} R package containing \href{https://rstudio.github.io/learnr/index.html}{\ttfamily learnr} tutorials based on \href{https://qss.princeton.press}{Quantitative Social Science: An Introduction} by Kosuke Imai from Princeton University Press.
+  
+\end{cvlist}
+
+
+\marginhead{Invited Talks}
+
+\begin{cvlist}[itemsep = 0em, parsep = 0em]
+  \item  Department of Political Science,  University of Wisconsin, Madison. February, 2019. 
+
+  \item  Department of Political Science, Yale University. January, 2019. 
+
+  \item  Modeling Politics \& Policy in Time and Space, Texas A\& M. April, 2017. 
+
+  \item  Department of Political Science, Yale University. February, 2017. 
+
+  \item  Department of Political Science, Rice University. November, 2016. 
+
+  \item  St.\ Louis Area Methods Meeting, American University. April, 2016. 
+
+  \item  Political Methodology Workshop, UCSD. April, 2016. 
+
+  \item  9th Annual NYU-CESS Conference on Experimental Political Science, NYU. February, 2016. 
+
+  \item  Historical Political Economy Conference, London School of Economics. January, 2016. 
+
+  \item  American Politics Conference, MIT.\@ September, 2015. 
+
+  \item  Rockefeller Center Public Lecture, Dartmouth College. June, 2015.
+
+  \item  Workshop in Quantitative Social Science, Dartmouth College. June, 2015.
+
+  \item  Economic History Workshop, Department of Economics, Harvard University. February, 2015.
+
+  \item  Research in American \& Comparative Politics Workshop, Boston University. October, 2014.
+
+  \item  Political Methodology Seminar, Princeton University. February 2014. 
+
+  \item  Center for the Study of Democratic Politics Seminar, Princeton University. February 2014.
+
+  \item  Department of Clinical and Social Sciences in Psychology, University of Rochester. November 2013.
+
+  \item  Departmental Workshop, Department of Political Science, Stanford University. October 2013.
+
+  \item  Rochester Big Data Forum, University of Rochester. September 2012.
+
+  \item  Research Workshop in American Politics, Department of Political Science, University of California, Berkeley.
+  December 2011.
+
+  \item  New Faces in Political Methodology, Penn State University. April 2011. 
+
+  \item  Murno Lecture Series, Department of Political Science, Stanford University. January 2011. 
+
+  \item  Stata Conference, Boston, MA\@. July 2010.
+\end{cvlist}
+\bigskip
+
+\marginhead{Conference Participation}
+
+\begin{cvlist}[itemsep = 0em, parsep = 0em]
+\item  {\bfseries Midwest Political Science Association Annual Conference} Paper: 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018; Discussant: 2013, 2014, 2015, 2016, 2017.
+\item  {\bfseries American Political Science Association Annual Meeting} Paper: 2010, 2011, 2013, 2014, 2015, 2017. Discussant: 2017.
+\item  {\bfseries Society for Political Methodology Summer Meeting} Poster: 2008--2012; Paper: 2010, 2013, 2014, 2015, 2017, 2018, 2020; Discussant: 2012, 2015, 2017, 2019, 2020.
+\item  {\bfseries European Political Science Associate Annual Conference} Paper: 2015. 
+\item  {\bfseries Atlantic Causal Inference Conference} Paper: 2016. 
+\end{cvlist}
+\bigskip
+
+\marginhead{Teaching}
+\begin{cvlist}
+  \item {\bfseries Harvard University}
+  \begin{cvlist}
+  \item Government 50: Introduction to Political Science Research Methods (Fall 2017, 2018).
+  \item \href{http://gov51.mattblackwell.org}{Government 51: Data Analysis and Politics} (Fall 2020).
+  \item Government 2000: Introduction to Quantiative Methods I (Fall 2014--2016).
+  \item \href{https://mattblackwell.github.io/gov2003-f21-site/}{Government 2002/2003: Causal Inference} (Fall 2015-2017, Fall 2021).
+  \item Government 2002: Topics in Political Methodology (with Arthur Spirling, Fall 2014).
+  \item \href{https://gov2002.mattblackwell.org}{Government 2002: Quantitative Social Science Methods II} (Spring, 2021).
+  \item Government 2003: Topics in Political Methodology (with Kosuke Imai, Spring 2019).
+  \end{cvlist}
+
+  \item {\bfseries University of Rochester}
+  \begin{cvlist}
+  \item Political Science 200: Applied Data Analysis. \href{http://www.mattblackwell.org/files/teaching/psc200-syllabus.pdf}{Syllabus}, \href{http://www.mattblackwell.org/files/teaching/psc200-notes.pdf}{Lecture Notes}
+  \item \href{http://www.mattblackwell.org/teaching/psc504/}{Political Science 504: Causal Inference}
+  \item Political Science 208W: Undergraduate Research Seminar.
+  \item Political Science 502: Political and Economic Networks (with Avi Acharya).
+  \end{cvlist}
+
+  \item {\bfseries Other}
+  \begin{cvlist}
+  \item Empirical Political Economy Network (EPEN) Summer School, May 2014, Mexico City. 
+  \end{cvlist}
+\end{cvlist}
+
+
+\marginhead{Service}
+
+\begin{cvlist}
+\item \textbf{National Service:} Society for Political Methodology Nominations Committee, Chair, 2019--present. Society for Political Methodology Gosnell Prize Committee, 2018--2019. Editorial Board, Journal of Politics, 2017--2018.  Society for Political Methodology John T. William Prize for Best Dissertation Proposal Committee, 2016--2017; Society for Political Methodology Statistical Software Award Committee, 2015--2016.
+
+\item \textbf{University/Department Service:} Faculty Chair of the Government Department Data Science Track, 2020--present. Committee on Higher Degrees in Political Economy and Government, 2016--present; Political Methodology Field Coordinator, 2016--2021. Strategic Vision Committee, 2016--2017; Selection Committee for Harvard College-UK Fellowships for Graduate Study, 2017; Graduate Student Poster Session Co-coordinator, 2015; Quantitative Methods Search Committee, 2015; Hoopes Prize Social Science Committee, 2015, 2021, 2022; Cutler Seminar for Political Methodology, 2013-2014, co-coordinator with Curt Signorino; Graduate Admissions Committee, 2013-2014; Institute for Data Science Search Committee, 2013-2014; Undergraduate Faculty Advisor, 2012-2013. 
+
+\item \textbf{Dissertation Committees:}
+
+  \begin{cvlist}
+\item Hye-Sung Kim (University of Rochester, Assistant Professor at Appalachian State University).
+%\item Ella Foster-Molina (University of Rochester).
+\item Rabia Malik (University of Rochester, Assistant Professor at Lahore University of Management Sciences).
+\item Benjamin Laughlin (University of Rochester, Assistant Professor at NYU-Abu Dhabi).
+\item Mayya Komisarchik (Harvard University, Assistant Professor at University of Rochester).
+\item Michael Olson (Harvard University, Assistant Professor at Washington University in St. Louis).
+\item Gabriel Koehler-Derrick (Harvard University, Assistant Professor NYU-Abu Dhabi).
+\item Aytu\u{g} \c{S}a\c{s}maz (Harvard University, Assistant Professor at Bryn Mawr College).
+\item Shom Mazumder (Harvard University).
+%\item Riley Carney (Harvard University, In Progress).
+\item Soichiro Yamauchi (Harvard University, In Progress).
+\item Seth Soderborg (Harvard University, In Progress).
+\item Jacob Brown (Harvard University, Postdoctoral Fellow at Princeton University, to be Assistant Professor at Boston University).
+\item Sophie Hill (Harvard University, In Progress).
+\end{cvlist} 
+
+\item \textbf{Reviewer for:} \emph{American Economic Review: Insights, American Journal of Political Science, American Political Science Review, American Sociological Review, Biostatistics, British Journal of Political Science, Comparative Political Studies, Economics and Politics, Historical Methods, Journal of the American Statistical Association, Journal of Applied Statistics, Journal of Causal Inference, Journal of Development Economics, Journal of the European Economic Association, Journal of Peace Research, Journal of Political Economy, Journal of Politics, Journal of Statistical Software, Journal of the Royal Statistical Society (Series A \& B), Journal of Theoretical Politics, Journalism \& Mass Communication Quarterly, Legislative Studies Quarterly, Multivariate Behavioral Research, National Science Foundation, Observational Studies, PLOS ONE, Political Analysis, Political Behavior, Political Science Research \& Methods, Public Opinion Quarterly, Quarterly Journal of Economics, Quarterly Journal of Political Science, Research \& Politics, Social Science Research, Sociological Methods \& Research,  Statistical Analysis and Data Mining, Statistics in Medicine, World Development, World Politics} 
+
+
+\end{cvlist}
+
 \end{document}
 
 
